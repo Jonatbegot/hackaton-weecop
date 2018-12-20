@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,13 +10,13 @@ import { FormBuilder } from '@angular/forms';
 })
 export class FormRendezVousComponent implements OnInit {
 
-  RendezVousForm = this.fb.group({
-    firstName : [''],
-    lastName: [''],
-    sujet: [''],
-    societe: [''],
-    debut: [Date],
-    fin: [Date]
+  rendezVousForm = this.fb.group({
+    name : ['', Validators.required],
+    email: ['', Validators.required],
+    title: ['', Validators.required],
+    company: [''],
+    start: [Date, Validators.required],
+    end: [Date, Validators.required]
   });
 
   constructor(
@@ -26,8 +26,9 @@ export class FormRendezVousComponent implements OnInit {
 
   ngOnInit() {
   }
-  onNoClick(): void {
-    this.dialogRef.close();
+
+  submit(): void {
+    this.dialogRef.close(this.rendezVousForm);
   }
   onSubmit() {}
 

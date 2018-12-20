@@ -1,25 +1,13 @@
-const fs = require('fs');
-const {google} = require('googleapis');
-const googleAuth = require('google-auth-library');
+const { google } = require('googleapis');
+const oAuth2 = require('./oAuth');
 const express = require('express');
 const app = express();
+const cors = require('cors');
+
+app.use(cors());
+
 const bodyParser = require('body-parser');
 const port = 3000;
-
-
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-  process.env.USERPROFILE) + '/.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'token.json';
-
-const googleSecrets = JSON.parse(fs.readFileSync('client_secret.json')).installed;
-var oauth2Client = new googleAuth.OAuth2Client(
-  googleSecrets.client_id,
-  googleSecrets.client_secret,
-  googleSecrets.redirect_uris[0]
-);
-
-const token = fs.readFileSync(TOKEN_PATH);
-oauth2Client.setCredentials(JSON.parse(token));
 
 
 app.get('/calendar/events', function (req, res) {
@@ -27,11 +15,11 @@ app.get('/calendar/events', function (req, res) {
     version: 'v3'
   });
   calendar.events.list({
-    auth: oauth2Client,
+    auth: oAuth2,
     calendarId: "primary",
-      timeMin: (new Date()).toISOString(),
-      singleEvents: true,
-      orderBy: 'startTime',
+    timeMin: (new Date()).toISOString(),
+    singleEvents: true,
+    orderBy: 'startTime',
   }, (err, response) => {
     if (err) {
       console.log('The API returned an error: ' + err);
@@ -40,6 +28,53 @@ app.get('/calendar/events', function (req, res) {
     res.json(response.data.items);
   });
 });
+
+function insertEvents() {
+  return {
+    summary: 'Google I/O 2015',
+    description: "A chance to hear more about Google's developer products.",
+    start: {
+      "dateTime": new Date("2019-01-01 11:40:0:0").toISOString(),
+      "timeZone": "Europe/Paris"
+    },
+    end: {
+      "dateTime": new Date("2019-01-02 11:40:0:0").toISOString(),
+      "timeZone": "Europe/Paris"
+    },
+    attendees: [{
+      displayName: 'lpage',
+      email: 'lpage@example.com',
+    }, {
+      displayName: 'lpage',
+      email: 'sbrin@example.com'
+    }],
+  };
+}
+
+app.post('/calendar/', (req, res) => {
+  const event = insertEvents();
+  const calendar = google.calendar({
+    version: 'v3',
+    oAuth2
+  });
+  calendar.events.insert({
+      auth: oAuth2,
+      calendarId: 'primary',
+      resource: event
+    },
+    function (err, event) {
+      if (err) {
+        console.log(
+          'There was an error contacting the Calendar service: ' + err
+        );
+        return;
+      }
+      res.send(event.data);
+      res.end();
+    }
+  );
+})
+
 
 app.listen(port, (err) => {
   if (err) {

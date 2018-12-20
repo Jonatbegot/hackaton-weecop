@@ -1,9 +1,11 @@
 import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-vous.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-// import { CalendarComponent } from 'ng-fullcalendar';
+import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import { CalendarService } from './common/calendar.service';
+
 import { weekdays } from 'moment';
 import { WeekDay } from '@angular/common';
 @Component({
@@ -12,10 +14,16 @@ import { WeekDay } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-constructor( private dialog: MatDialog) {}
+  events: any;
+constructor( private dialog: MatDialog, private service: CalendarService) {}
   title = 'my-angular-app';
   calendarOptions: Options;
+  @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+
   ngOnInit() {
+    this.service.getEvents().subscribe(res => {
+      this.events = res;
+    });
   this.calendarOptions = {
         defaultView: 'agendaWeek' ,
         editable: true,
@@ -41,4 +49,5 @@ modal() {
       console.log(`Dialog result: ${result}`); // Pizza!
     });
   }
+
 }

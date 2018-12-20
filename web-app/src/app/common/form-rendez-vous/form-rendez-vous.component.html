@@ -1,41 +1,33 @@
-
 <h2>Prise de rendez-vous</h2>
+<form [formGroup]="rendezVousForm" (ngSubmit)="submit()">
+  <mat-form-field>
+    <label> Nom </label>
+    <input type="text" name="firstname" formControlName="firstName" required>
+  </mat-form-field>
+  <mat-form-field>
+    <label> Prènom </label>
+    <input type="text" name="lastname" formControlName="lastName" required>
+  </mat-form-field>
+  <mat-form-field>
+    <label> sujet </label>
+    <input type="text" name="sujet" formControlName="sujet" required>
+  </mat-form-field>
+  <mat-form-field>
+    <label> societe </label>
+    <input type="text" name="societe" formControlName="societe" required>
+  </mat-form-field>
+  <mat-form-field>
+    <label> debut </label>
+    <input type="date" name="debut" formControlName="debut" required>
+  </mat-form-field>
+  <mat-form-field>
+    <label> fin </label>
+    <input type="date" name="fin" formControlName="fin" required>
+  </mat-form-field>
+  
+  <mat-dialog-actions>
+    <button tyoe="submit" mat-button>Proposer le rendez-vous</button>
+    <button mat-button [disabled]="!rendezVousForm.valid">Annuler</button>
+  </mat-dialog-actions>
 
-<form [formGroup]="RendezVousForm" (ngSubmit)="onSubmit()">
-<mat-form-field>
-  <label> Nom </label>
-  <input   type="text" name="firstname" formControlName="firstName" required>
-</mat-form-field>
-<mat-form-field>
-  <label> Prènom </label>
-  <input type="text" name="lastname" formControlName="lastName" required>
-</mat-form-field>
-<mat-form-field>
-  <label> sujet </label>
-  <input type="text" name="sujet" formControlName="sujet" required>
-</mat-form-field>
-<mat-form-field>
-  <label> societe </label>
-  <input type="text" name="societe" formControlName="societe" required>
-</mat-form-field>
-<mat-form-field>
-  <label> debut </label>
-  <input type="date" name="debut" formControlName="debut" required>
-</mat-form-field>
-<mat-form-field>
-  <label> fin </label>
-  <input type="date" name="fin" formControlName="fin" required>
-</mat-form-field>
-
-
-
-
-
-
-<mat-dialog-actions>
-  <button tyoe="submit" mat-button>Proposer le rendez-vous</button>
-  <button mat-button>Annuler</button>
-</mat-dialog-actions>
 </form>
-
-

@@ -7,8 +7,9 @@
     <ng-fullcalendar #ucCalendar [options]="calendarOptions"
     (eventDrop)="updateEvent($event.detail)"
     (eventResize)="updateEvent($event.detail)"
-    (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
-
+    (clickButton)="clickButton($event.detail)"
+    [(eventsModel)]="events"></ng-fullcalendar>
+    <button mat-buton (click)="modal()"> teste modal</button>
 </div>
 <button mat-buton (click)="modal()"> teste modal</button>
 </div>
