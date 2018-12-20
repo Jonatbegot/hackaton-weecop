@@ -7,6 +7,7 @@ const cors = require('cors');
 app.use(cors());
 
 const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 const port = 3000;
 
 
@@ -29,30 +30,31 @@ app.get('/calendar/events', function (req, res) {
   });
 });
 
-function insertEvents() {
-  return {
-    summary: 'Google I/O 2015',
-    description: "A chance to hear more about Google's developer products.",
-    start: {
-      "dateTime": new Date("2019-01-01 11:40:0:0").toISOString(),
-      "timeZone": "Europe/Paris"
-    },
-    end: {
-      "dateTime": new Date("2019-01-02 11:40:0:0").toISOString(),
-      "timeZone": "Europe/Paris"
-    },
-    attendees: [{
-      displayName: 'lpage',
-      email: 'lpage@example.com',
-    }, {
-      displayName: 'lpage',
-      email: 'sbrin@example.com'
-    }],
-  };
-}
+// function insertEvents() {
+//   return {
+//     summary: 'Google I/O 2015',
+//     description: "A chance to hear more about Google's developer products.",
+//     start: {
+//       "dateTime": new Date("2019-01-01 11:40:0:0").toISOString(),
+//       "timeZone": "Europe/Paris"
+//     },
+//     end: {
+//       "dateTime": new Date("2019-01-02 11:40:0:0").toISOString(),
+//       "timeZone": "Europe/Paris"
+//     },
+//     attendees: [{
+//       displayName: 'lpage',
+//       email: 'lpage@example.com',
+//     }, {
+//       displayName: 'lpage',
+//       email: 'sbrin@example.com'
+//     }],
+//   };
+// }
 
 app.post('/calendar/', (req, res) => {
-  const event = insertEvents();
+  const event = req.body;
+  console.log(event);
   const calendar = google.calendar({
     version: 'v3',
     oAuth2
@@ -67,7 +69,7 @@ app.post('/calendar/', (req, res) => {
         console.log(
           'There was an error contacting the Calendar service: ' + err
         );
-        return;
+        return res.status(500).send(err.message);
       }
       res.send(event.data);
       res.end();

@@ -25,7 +25,16 @@ export class FormRendezVousComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {
-      this.date = data.date._d;
+      this.date = data.date ? data.date._d : null;
+      if (data.name) {
+        this.form.patchValue({
+          name: data.name,
+          email: data.email,
+          title: data.title,
+          company: data.company,
+          endTime: data.endTime
+        });
+      }
     }
 
 
@@ -40,7 +49,7 @@ export class FormRendezVousComponent implements OnInit {
 
   createEvent() {
     const year = this.date.getFullYear();
-    const month = this.date.getMonth() + 1;
+    const month = this.date.getMonth();
     const day = this.date.getDate();
     const time = this.form.get('endTime').value;
     const start = this.date;

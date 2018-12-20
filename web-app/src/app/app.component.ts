@@ -47,6 +47,26 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log(result);
+        this.service.postEvent(result).subscribe(res => {
+          console.log(res);
+        });
+      }
+    });
+  }
+
+  updateEvent(e) {
+    const dialogRef = this.dialog.open(FormRendezVousComponent, {
+      height: '400px',
+      width: '600px',
+      data: e.event
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+        this.service.postEvent(result).subscribe(res => {
+          console.log(res);
+        });
       }
     });
   }
