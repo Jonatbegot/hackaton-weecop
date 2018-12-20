@@ -21,7 +21,7 @@ export class FormRendezVousComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
-    @Inject(MAT_DIALOG_DATA) private fb: FormBuilder ) {}
+    @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {}
 
 
   ngOnInit() {

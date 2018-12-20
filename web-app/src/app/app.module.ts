@@ -1,4 +1,6 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { MatDialogModule } from '@angular/material';
@@ -14,8 +16,10 @@ import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-v
   imports: [
     BrowserModule,
     FullCalendarModule,
-    MatDialogModule
-
+    MatDialogModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [FormRendezVousComponent],
   providers: [],

@@ -26,7 +26,9 @@ constructor( private dialog: MatDialog) {}
       };
   }
 
-  eventClick(metting, event) {
+modal() {
+    // this.displayEvent = model;
+
     const dialogRef = this.dialog.open(FormRendezVousComponent, {
       height: '400px',
       width: '600px',

@@ -5,9 +5,9 @@
   </h1>
   <div *ngIf="calendarOptions">
     <ng-fullcalendar #ucCalendar [options]="calendarOptions"
-    (eventClick)=" eventClick()"
     (eventDrop)="updateEvent($event.detail)"
     (eventResize)="updateEvent($event.detail)"
     (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+    <button mat-buton (click)="modal()"> teste modal</button>
 </div>
 </div>
