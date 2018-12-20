@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { MatDialogModule } from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
 import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-vous.component';
@@ -19,7 +20,8 @@ import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-v
     MatDialogModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule
   ],
   entryComponents: [FormRendezVousComponent],
   providers: [],

@@ -29,6 +29,7 @@ export class FormRendezVousComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  onSubmit() {}
 
   }
 
