@@ -1,8 +1,11 @@
-const {google} = require('googleapis');
+const { google } = require('googleapis');
+const oAuth2 = require('./oAuth');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
-const oAuth2 = require('./oAuth');
+app.use(cors());
+
 const bodyParser = require('body-parser');
 const port = 3000;
 

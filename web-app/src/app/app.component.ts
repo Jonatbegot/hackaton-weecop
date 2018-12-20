@@ -4,13 +4,16 @@ import { MatDialog } from '@angular/material';
 
 // import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+import { CalendarService } from './common/calendar.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-constructor( private dialog: MatDialog) {}
+  data: any;
+constructor( private dialog: MatDialog, private service: CalendarService) {}
   title = 'my-angular-app';
   calendarOptions: Options;
   ngOnInit() {
@@ -36,6 +39,13 @@ modal() {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`); // Pizza!
+    });
+  }
+
+  getEvents() {
+    this.service.getEvents().subscribe(res => {
+      this.data = res;
+      console.log(this.data);
     });
   }
 }
