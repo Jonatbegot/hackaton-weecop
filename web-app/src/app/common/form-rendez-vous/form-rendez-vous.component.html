@@ -1,11 +1,11 @@
 <h2>Prise de rendez-vous</h2>
-
-<input type="text" formControlName="firstName" required>
-<input type="text" formControlName="lastName" required>
-<input type="text" formControlName="sujet" required>
-<input type="text" formControlName="societe" required>
-<input type="date" formControlName="debut" required>
-<input type="date" formControlName="fin" required>
-
-<button mat-button>Proposer le rendez-vous</button>
-<button mat-button>Annuler</button>
+<form [formGroup]="RendezVousForm" (ngSubmit)="onSubmit()">
+  <input type="text" name="firstname" formControlName="firstName" required>
+  <input type="text" name="lastname" formControlName="lastName" required>
+  <input type="text" name="sujet" formControlName="sujet" required>
+  <input type="text" name="societe" formControlName="societe" required>
+  <input type="date" name="debut" formControlName="debut" required>
+  <input type="date" name="fin" formControlName="fin" required>
+  <button tyoe="submit" mat-button>Proposer le rendez-vous</button>
+  <button mat-button>Annuler</button>
+</form>
