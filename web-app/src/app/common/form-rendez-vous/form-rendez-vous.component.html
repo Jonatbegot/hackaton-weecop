@@ -1,5 +1,5 @@
 <h2>Prise de rendez-vous</h2>
-<form [formGroup]="RendezVousForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="rendezVousForm" (ngSubmit)="submit()">
   <input type="text" name="firstname" formControlName="firstName" required>
   <input type="text" name="lastname" formControlName="lastName" required>
   <input type="text" name="sujet" formControlName="sujet" required>
@@ -7,5 +7,5 @@
   <input type="date" name="debut" formControlName="debut" required>
   <input type="date" name="fin" formControlName="fin" required>
   <button tyoe="submit" mat-button>Proposer le rendez-vous</button>
-  <button mat-button>Annuler</button>
+  <button mat-button [disabled]="!rendezVousForm.valid">Annuler</button>
 </form>

@@ -1,8 +1,8 @@
 export class Event {
     constructor (
       public id: string,
-      public firstName: string,
-      public lastName: string,
+      public name: string,
+      public email: string,
       public title: string,
       public company: string,
       public start: Date,
