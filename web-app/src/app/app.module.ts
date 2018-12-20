@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { MatDialogModule, MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -31,6 +32,7 @@ import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-v
     MatFormFieldModule,
     HttpClientModule,
     MatInputModule,
+    MatCardModule
   ],
   entryComponents: [FormRendezVousComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
