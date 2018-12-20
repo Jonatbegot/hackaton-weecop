@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
     this.calendarOptions = {
       defaultView: 'agendaWeek',
       locale: 'fr',
+      allDaySlot: false,
       editable: true,
       eventLimit: false,
       header: {
@@ -44,7 +45,9 @@ export class AppComponent implements OnInit {
       minTime: moment.duration('08:00:00'),
       maxTime: moment.duration('19:00:00'),
       contentHeight: 500,
-      timezone: 'Europe/Paris'
+      timezone: 'Europe/Paris',
+      eventColor: '#ba8fa8',
+      displayEventTime: false,
     };
   }
 

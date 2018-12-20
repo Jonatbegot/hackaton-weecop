@@ -8,7 +8,7 @@
       <ng-fullcalendar #ucCalendar
         [options]="calendarOptions"
         (dayClick)="addEvent($event.detail)"
-        (eventClick)="updateEvent($event.detail)"
+        <!-- (eventClick)="updateEvent($event.detail)" -->
         [(eventsModel)]="events"></ng-fullcalendar>
     </div>
   </mat-card>

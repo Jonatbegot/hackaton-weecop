@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Event, toEvent } from './event';
-import { GoogleEvent, toGoogleEvent } from './eventGoogle';
+import { toGoogleEvent } from './eventGoogle';
+import { toEventShort } from './eventShort';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class CalendarService {
   getEvents(): Observable<any> {
     return this.http.get<Event[]>(`http://localhost:3000/calendar/events`)
       .pipe(
-        map(events => events.map(event => toEvent(event)))
+        map(events => events.map(event => toEventShort(event)))
       );
   }
   postEvent(data): Observable<any> {
