@@ -2,32 +2,20 @@
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field>
-    <label> Nom </label>
-    <input matInput type="text" name="name" formControlName="name" required>
+    <input matInput placeholder="Nom" type="text" name="name" formControlName="name" required>
   </mat-form-field>
   <mat-form-field>
-    <label> E-mail </label>
-    <input matInput placeholder="emali" type="text" name="email" formControlName="email" required>
+    <input matInput placeholder="E-mail" type="text" name="email" formControlName="email" required>
   </mat-form-field>
   <mat-form-field>
-    <label> Sujet </label>
-    <input matInput type="text" name="title" formControlName="title" required>
+    <input matInput placeholder="Sujet" type="text" name="title" formControlName="title" required>
   </mat-form-field>
   <mat-form-field>
-    <label> Entreprise </label>
-    <input matInput type="text" name="company" formControlName="company" required>
+    <input matInput placeholder="Entreprise" type="text" name="company" formControlName="company" required>
   </mat-form-field>
+  <p>Début : {{ date |  date:'EEE dd LLLL yyyy hh:mm' }}</p>
   <mat-form-field>
-    <label> Date </label>
-    <input matInput type="date" name="start" formControlName="start" required>
-  </mat-form-field>
-  <mat-form-field>
-    <label> De : </label>
-    <input matInput type="time" name="startTime" formControlName="startTime" required>
-  </mat-form-field>
-  <mat-form-field>
-    <label> À : </label>
-    <input matInput type="time" name="endTime" formControlName="endTime" required>
+    <input matInput placeholder="Fin du rendez-vous :" type="time" name="endTime" formControlName="endTime" required>
   </mat-form-field>
 
   <mat-dialog-actions>

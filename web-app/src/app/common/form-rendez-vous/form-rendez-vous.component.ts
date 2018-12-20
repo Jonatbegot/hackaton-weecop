@@ -16,16 +16,17 @@ export class FormRendezVousComponent implements OnInit {
     email: ['', Validators.required],
     title: ['', Validators.required],
     company: [''],
-    start: [Date, Validators.required],
-    startTime: ['', Validators.required],
     endTime: ['', Validators.required]
   });
 
   event: Event;
+  date: any;
 
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
-    @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {}
+    @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {
+      this.date = data.date._d;
+    }
 
 
   ngOnInit() {
@@ -38,11 +39,12 @@ export class FormRendezVousComponent implements OnInit {
   }
 
   createEvent() {
-    const start = this.form.get('start').value
-      + ' ' + this.form.get('startTime').value + ':00:0';
-    const end = this.form.get('start').value
-      + ' ' + this.form.get('endTime').value + ':00:0';
-
+    const year = this.date.getFullYear();
+    const month = this.date.getMonth() + 1;
+    const day = this.date.getDate();
+    const time = this.form.get('endTime').value;
+    const start = this.date;
+    const end = new Date(2018, 12, 21, time.substr(0, 2), time.substr(3, 5)).toISOString();
     this.event = new Event(
       this.form.get('name').value,
       this.form.get('email').value,

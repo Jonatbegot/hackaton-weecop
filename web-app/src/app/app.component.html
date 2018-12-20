@@ -8,6 +8,7 @@
       [options]="calendarOptions"
       (eventDrop)="updateEvent($event.detail)"
       (eventResize)="updateEvent($event.detail)"
+      (dayClick)="addEvent($event.detail)"
       (clickButton)="clickButton($event.detail)"
       [(eventsModel)]="events"></ng-fullcalendar>
     <button mat-buton (click)="addEvent()">add event</button>
