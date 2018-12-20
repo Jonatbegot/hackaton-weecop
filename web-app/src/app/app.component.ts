@@ -6,8 +6,8 @@ import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { CalendarService } from './common/calendar.service';
 
-import { weekdays } from 'moment';
-import { WeekDay } from '@angular/common';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +16,7 @@ import { WeekDay } from '@angular/common';
 export class AppComponent implements OnInit {
   events: any;
 constructor( private dialog: MatDialog, private service: CalendarService) {}
-  title = 'my-angular-app';
+  title = 'Outil de prise de rendez-vous';
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
@@ -26,14 +26,23 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
     });
   this.calendarOptions = {
         defaultView: 'agendaWeek' ,
+        locale: 'fr',
         editable: true,
         eventLimit: false,
         header: {
           left: 'prev,next today',
           center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
-        }
-
+          right: 'month,agendaWeek,agendaDay,listMonth',
+        },
+        businessHours: {
+          // days of week. an array of zero-based day of week integers (0=Sunday)
+          dow: [ 1, 2, 3, 4, 5 ], // Monday - Friday
+          start: '08:00', // a start time (8am in this example)
+          end: '19:00', // an end time (7pm in this example)
+        },
+        weekends: false,
+        minTime: moment.duration('08:00:00'),
+        maxTime: moment.duration('19:00:00'),
       };
   }
 
@@ -46,9 +55,7 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
         this.service.postEvent(result).subscribe(res => {
-          console.log(res);
         });
       }
     });
@@ -63,9 +70,7 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log(result);
         this.service.postEvent(result).subscribe(res => {
-          console.log(res);
         });
       }
     });

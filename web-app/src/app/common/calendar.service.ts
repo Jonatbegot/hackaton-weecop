@@ -20,8 +20,6 @@ export class CalendarService {
   }
   postEvent(data): Observable<any> {
     const newEvent = toGoogleEvent(data);
-    console.log(newEvent);
-    console.log(data);
     return this.http.post<Event>(`http://localhost:3000/calendar`, newEvent)
       .pipe(
         map(event => toEvent(event))

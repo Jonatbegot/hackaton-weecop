@@ -30,28 +30,6 @@ app.get('/calendar/events', function (req, res) {
   });
 });
 
-// function insertEvents() {
-//   return {
-//     summary: 'Google I/O 2015',
-//     description: "A chance to hear more about Google's developer products.",
-//     start: {
-//       "dateTime": new Date("2019-01-01 11:40:0:0").toISOString(),
-//       "timeZone": "Europe/Paris"
-//     },
-//     end: {
-//       "dateTime": new Date("2019-01-02 11:40:0:0").toISOString(),
-//       "timeZone": "Europe/Paris"
-//     },
-//     attendees: [{
-//       displayName: 'lpage',
-//       email: 'lpage@example.com',
-//     }, {
-//       displayName: 'lpage',
-//       email: 'sbrin@example.com'
-//     }],
-//   };
-// }
-
 app.post('/calendar/', (req, res) => {
   const event = req.body;
   console.log(event);
@@ -62,7 +40,8 @@ app.post('/calendar/', (req, res) => {
   calendar.events.insert({
       auth: oAuth2,
       calendarId: 'primary',
-      resource: event
+      resource: event,
+      sendUpdates: 'all',
     },
     function (err, event) {
       if (err) {

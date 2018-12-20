@@ -27,12 +27,13 @@ export class FormRendezVousComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {
       this.date = data.date ? data.date._d : null;
       if (data.name) {
+        this.date = data.start;
         this.form.patchValue({
           name: data.name,
           email: data.email,
           title: data.title,
           company: data.company,
-          endTime: data.endTime
+          endTime: `${data.end._d.getHours()}:${data.end._d.getMinutes()}`
         });
       }
     }
@@ -43,7 +44,6 @@ export class FormRendezVousComponent implements OnInit {
 
   submit(): void {
     this.createEvent();
-    console.log(this.event);
     this.dialogRef.close(this.event);
   }
 
