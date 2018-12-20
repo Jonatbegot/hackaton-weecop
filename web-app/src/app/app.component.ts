@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       defaultView: 'agendaWeek',
       locale: 'fr',
       allDaySlot: false,
-      editable: true,
+      editable: false,
       eventLimit: false,
       header: {
         left: 'prev,next today',
