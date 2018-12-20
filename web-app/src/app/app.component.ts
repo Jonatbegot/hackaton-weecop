@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material';
 import { Options } from 'fullcalendar';
 import { CalendarService } from './common/calendar.service';
 
+import { weekdays } from 'moment';
+import { WeekDay } from '@angular/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +20,7 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
   calendarOptions: Options;
   ngOnInit() {
   this.calendarOptions = {
+        defaultView: 'agendaWeek' ,
         editable: true,
         eventLimit: false,
         header: {
