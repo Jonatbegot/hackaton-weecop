@@ -21,6 +21,9 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
 
   ngOnInit() {
+    this.service.getEvents().subscribe(res => {
+      this.events = res;
+    });
   this.calendarOptions = {
         defaultView: 'agendaWeek' ,
         editable: true,
@@ -47,11 +50,4 @@ modal() {
     });
   }
 
-  getEvents() {
-    this.service.getEvents().subscribe(res => {
-      this.events = res;
-      console.log(res);
-      console.log(this.events);
-    });
-  }
 }
