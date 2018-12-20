@@ -4,12 +4,12 @@
     Welcome to {{ title }}!
   </h1>
   <div *ngIf="calendarOptions">
-    <ng-fullcalendar #ucCalendar [options]="calendarOptions"
-    (eventDrop)="updateEvent($event.detail)"
-    (eventResize)="updateEvent($event.detail)"
-    (clickButton)="clickButton($event.detail)"
-    [(eventsModel)]="events"></ng-fullcalendar>
-    <button mat-buton (click)="modal()"> teste modal</button>
-</div>
-<button mat-buton (click)="modal()"> teste modal</button>
+    <ng-fullcalendar #ucCalendar
+      [options]="calendarOptions"
+      (eventDrop)="updateEvent($event.detail)"
+      (eventResize)="updateEvent($event.detail)"
+      (clickButton)="clickButton($event.detail)"
+      [(eventsModel)]="events"></ng-fullcalendar>
+    <button mat-buton (click)="addEvent()">add event</button>
+  </div>
 </div>

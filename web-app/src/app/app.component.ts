@@ -37,16 +37,14 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
       };
   }
 
-modal() {
-    // this.displayEvent = model;
-
+  addEvent() {
     const dialogRef = this.dialog.open(FormRendezVousComponent, {
       height: '400px',
       width: '600px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`); // Pizza!
+      console.log(`Dialog result: ${result}`);
     });
   }
 

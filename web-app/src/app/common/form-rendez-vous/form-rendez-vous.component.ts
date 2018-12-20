@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Event } from '../event';
 
 
 @Component({
@@ -10,14 +11,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class FormRendezVousComponent implements OnInit {
 
-  rendezVousForm = this.fb.group({
+  form = this.fb.group({
     name : ['', Validators.required],
     email: ['', Validators.required],
     title: ['', Validators.required],
     company: [''],
     start: [Date, Validators.required],
-    end: [Date, Validators.required]
+    startTime: ['', Validators.required],
+    endTime: ['', Validators.required]
   });
+
+  event: Event;
 
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
@@ -28,10 +32,26 @@ export class FormRendezVousComponent implements OnInit {
   }
 
   submit(): void {
-    this.dialogRef.close(this.rendezVousForm);
-  }
-  onSubmit() {}
+    this.createEvent();
 
+    this.dialogRef.close(this.event);
   }
+
+  createEvent() {
+    const start = this.form.get('start').value
+      + ' ' + this.form.get('startTime').value + ':00:0';
+    const end = this.form.get('start').value
+      + ' ' + this.form.get('endTime').value + ':00:0';
+
+    this.event = new Event(
+      this.form.get('name').value,
+      this.form.get('email').value,
+      this.form.get('title').value,
+      this.form.get('company').value,
+      start,
+      end
+    );
+  }
+}
 
 
