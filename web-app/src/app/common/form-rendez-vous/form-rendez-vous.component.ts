@@ -44,7 +44,7 @@ export class FormRendezVousComponent implements OnInit {
     const day = this.date.getDate();
     const time = this.form.get('endTime').value;
     const start = this.date;
-    const end = new Date(2018, 12, 21, time.substr(0, 2), time.substr(3, 5)).toISOString();
+    const end = new Date(year, month, day, time.substr(0, 2), time.substr(3, 5)).toISOString();
     this.event = new Event(
       this.form.get('name').value,
       this.form.get('email').value,
