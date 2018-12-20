@@ -39,16 +39,12 @@ export class AppComponent implements OnInit {
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listMonth',
       },
-      businessHours: {
-        // days of week. an array of zero-based day of week integers (0=Sunday)
-        dow: [1, 2, 3, 4, 5], // Monday - Friday
-        start: '08:00', // a start time (8am in this example)
-        end: '19:00', // an end time (7pm in this example)
-      },
+      slotDuration: moment.duration('0:30:00'),
       weekends: false,
       minTime: moment.duration('08:00:00'),
       maxTime: moment.duration('19:00:00'),
       contentHeight: 500,
+      timezone: 'Europe/Paris'
     };
   }
 
@@ -62,8 +58,6 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.postEvent(result).subscribe(res => {
-          this.events.push(res);
-          this.newEvent = res;
           this.ucCalendar.fullCalendar('renderEvent', res);
         });
       }

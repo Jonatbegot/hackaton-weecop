@@ -13,10 +13,11 @@
   <mat-form-field>
     <input matInput placeholder="Entreprise" type="text" name="company" formControlName="company" required>
   </mat-form-field>
-  <p>Début : {{ date |  date:'EEE dd LLLL yyyy hh:mm' }}</p>
-  <mat-form-field>
+  <p>Début : {{ startDate |  date:'EEE dd LLLL yyyy hh:mm':'Europe/Paris' }}</p>
+  <p>Fin : {{ endDate |  date:'EEE dd LLLL yyyy hh:mm':'Europe/Paris' }}</p>
+  <!-- <mat-form-field>
     <input matInput placeholder="Fin du rendez-vous :" type="time" name="endTime" formControlName="endTime" required>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <mat-dialog-actions>
     <button mat-button type="submit" [disabled]="!form.valid">Proposer le rendez-vous</button>

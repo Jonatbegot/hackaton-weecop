@@ -15,19 +15,25 @@ export class FormRendezVousComponent implements OnInit {
     name : ['', Validators.required],
     email: ['', Validators.required],
     title: ['', Validators.required],
-    company: [''],
-    endTime: ['', Validators.required]
+    company: ['']
   });
 
   event: Event;
-  date: any;
+  startDate: any;
+  endDate: any;
 
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {
-      this.date = data.date ? data.date._d : null;
+      // if creation
+      if (data.date) {
+        this.startDate = this.getStartDate(data);
+        this.endDate = this.getEndDate(data);
+      }
+      // if update
       if (data.name) {
-        this.date = data.start;
+        this.startDate = data.start;
+        this.endDate = data.end;
         this.form.patchValue({
           name: data.name,
           email: data.email,
@@ -48,12 +54,9 @@ export class FormRendezVousComponent implements OnInit {
   }
 
   createEvent() {
-    const year = this.date.getFullYear();
-    const month = this.date.getMonth();
-    const day = this.date.getDate();
-    const time = this.form.get('endTime').value;
-    const start = this.date;
-    const end = new Date(year, month, day, time.substr(0, 2), time.substr(3, 5)).toISOString();
+    const start = this.startDate;
+    const end = this.endDate;
+
     this.event = new Event(
       this.form.get('name').value,
       this.form.get('email').value,
@@ -61,6 +64,30 @@ export class FormRendezVousComponent implements OnInit {
       this.form.get('company').value,
       start,
       end
+    );
+  }
+
+  getStartDate(data) {
+    return new Date(
+      data.date._i[0], // year
+      data.date._i[1], // month
+      data.date._i[2], // day
+      data.date._i[3], // hour
+      data.date._i[4], // min
+      data.date._i[5], // sec
+      data.date._i[6] // millisec
+    );
+  }
+
+  getEndDate(data) {
+    return new Date(
+      data.date._i[0], // year
+      data.date._i[1], // month
+      data.date._i[2], // day
+      data.date._i[4] === 30 ? data.date._i[3] + 1 : data.date._i[3], // hour
+      data.date._i[4] === 30 ? 0 : 30, // min
+      data.date._i[5], // sec
+      data.date._i[6] // millisec
     );
   }
 }
