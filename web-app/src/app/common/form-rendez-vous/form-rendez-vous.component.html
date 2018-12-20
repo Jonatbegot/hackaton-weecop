@@ -1,4 +1,5 @@
-<h2>Prise de rendez-vous</h2>
+<h2 mat-dialog-title>Prise de rendez-vous</h2>
+
 <form [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field>
     <label> Nom </label>
@@ -6,7 +7,7 @@
   </mat-form-field>
   <mat-form-field>
     <label> E-mail </label>
-    <input matInput type="text" name="email" formControlName="email" required>
+    <input matInput placeholder="emali" type="text" name="email" formControlName="email" required>
   </mat-form-field>
   <mat-form-field>
     <label> Sujet </label>
@@ -30,8 +31,8 @@
   </mat-form-field>
 
   <mat-dialog-actions>
-    <button type="submit" [disabled]="!form.valid" mat-button>Proposer le rendez-vous</button>
-    <button mat-button >Annuler</button>
+    <button mat-button type="submit" [disabled]="!form.valid">Proposer le rendez-vous</button>
+    <button mat-button mat-dialog-close>Annuler</button>
   </mat-dialog-actions>
 
 </form>

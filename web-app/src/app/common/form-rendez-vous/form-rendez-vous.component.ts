@@ -33,7 +33,7 @@ export class FormRendezVousComponent implements OnInit {
 
   submit(): void {
     this.createEvent();
-
+    console.log(this.event);
     this.dialogRef.close(this.event);
   }
 

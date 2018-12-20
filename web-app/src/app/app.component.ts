@@ -44,7 +44,9 @@ constructor( private dialog: MatDialog, private service: CalendarService) {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        console.log(result);
+      }
     });
   }
 
