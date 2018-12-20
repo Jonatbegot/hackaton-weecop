@@ -41,7 +41,7 @@ app.post('/calendar/', (req, res) => {
       auth: oAuth2,
       calendarId: 'primary',
       resource: event,
-   //   sendUpdates: 'all',
+  //   sendUpdates: 'all',
     },
     function (err, event) {
       if (err) {
