@@ -17,4 +17,7 @@ export class CalendarService {
       map(events => events.map(event => toEvent(event)))
     );
   }
+// postEvents(): Observable<any> {
+
+// }
 }
