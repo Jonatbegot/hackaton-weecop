@@ -1,6 +1,6 @@
 import { FormRendezVousComponent } from '../form-rendez-vous/form-rendez-vous.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
@@ -24,7 +24,8 @@ export class CalendarViewComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private service: CalendarService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar) { }
 
   title = 'Outil de prise de rendez-vous';
   calendarOptions: Options;
@@ -54,10 +55,24 @@ export class CalendarViewComponent implements OnInit {
       timezone: 'Europe/Paris',
       eventColor: '#ba8fa8',
       displayEventTime: false,
+      selectable: true,
+      selectConstraint: {
+        start: moment().subtract(1, 'days'),
+        end: moment().startOf('year').add(100, 'year')
+      },
     };
   }
 
   addEvent(e) {
+    const current = new Date(moment().format());
+    const selected = e.date._d;
+    if (selected.getTime() < current.getTime()) {
+      // const snackBarRef = this.snackBar.open('Créneau horaire déjà passé');
+      this.snackBar.open('Créneau horaire déjà passé', '', {
+        duration: 2000
+      });
+      return console.log('Créneau horaire déjà passé');
+    }
     const dialogRef = this.dialog.open(FormRendezVousComponent, {
       height: '500px',
       width: '800px',
