@@ -64,13 +64,10 @@ export class CalendarViewComponent implements OnInit {
       data: e
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.service.postEvent(result, this.calendarId).subscribe(res => {
-          this.confirmEvent(res);
-          res.title = 'réservé';
-          this.ucCalendar.fullCalendar('renderEvent', res);
-        });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+     this.confirmEvent(data);
+
       }
     });
   }
@@ -83,7 +80,14 @@ export class CalendarViewComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.service.postEvent(result, this.calendarId).subscribe(res => {
+          res.title = 'réservé';
+          this.ucCalendar.fullCalendar('renderEvent', res);
+        });
+
+      } else {
         this.addEvent(data);
+
       }
     });
   }
