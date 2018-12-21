@@ -8,6 +8,7 @@ import { CalendarService } from './common/calendar.service';
 
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { toEventShort } from './common/eventShort';
 
 @Component({
   selector: 'app-root',
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
       if (result) {
         this.service.postEvent(result).subscribe(res => {
           this.confirmEvent(res);
+          res.title = 'réservé';
           this.ucCalendar.fullCalendar('renderEvent', res);
         });
       }
@@ -86,7 +88,6 @@ export class AppComponent implements OnInit {
 
 
   confirmEvent(data) {
-    console.log('ok');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '800px',
       data: data
