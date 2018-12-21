@@ -12,12 +12,12 @@ const port = 3000;
 
 const calIds = {
   1: {
-    id: 'primary',
-    email: 'hackathon2wcs@gmail.com'
+    id: 'jobegot1@gmail.com',
+    email: 'jobegot1@gmail.com'
   },
   2: {
-    id: 'jlagoj5jko2b32it06t90inr7o@group.calendar.google.com',
-    email: 'hackathon2wcs@gmail.com'
+    id: 'm35l66kbcos8lnm20ltt77o8o8@group.calendar.google.com',
+    email: 'hemilie94@gmail.com'
   }
 }
 
@@ -46,6 +46,8 @@ app.get('/calendar/events/:calId', function (req, res) {
 app.post('/calendar/:calId', (req, res) => {
   const calId = req.params.calId;
   const calendarEmail = calIds[calId].email;
+  const calendarId = calIds[calId].id;
+  console.log(calendarId);
 
   const event = req.body;
   event.attendees.push({
@@ -59,7 +61,7 @@ app.post('/calendar/:calId', (req, res) => {
   });
   calendar.events.insert({
       auth: oAuth2,
-      calendarId: '2hlruo3oqh5e91nlsgkrqsifbk@group.calendar.google.com', // calendrier tampon
+      calendarId: calendarId,
       resource: event,
     sendUpdates: 'all',
     },

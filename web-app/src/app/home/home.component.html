@@ -1,22 +1,52 @@
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-    <mat-card [routerLink]="['/calendar/1']">
-      <div fxLayoutAlign="center center">Société 1</div>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card [routerLink]="['/calendar/2']">
-      <div fxLayoutAlign="center center">Société 2</div>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card [routerLink]="['/calendar/3']">
-      <div fxLayoutAlign="center center">Société 3</div>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card [routerLink]="['/calendar/4']">
-      <div fxLayoutAlign="center center">Société 4</div>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<ng-container>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <mat-card [routerLink]="['/calendar/1']">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h2>
+            Société 1
+          </h2>
+          <p fxLayoutAlign="center center">
+            <img src="../../assets/logo.png" alt="company logo">
+          </p>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [routerLink]="['/calendar/2']">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h2>
+            Société 2
+          </h2>
+          <p fxLayoutAlign="center center">
+            <img src="../../assets/logo.png" alt="company logo">
+          </p>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [routerLink]="['/calendar/3']">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h2>
+            Société 3
+          </h2>
+          <p fxLayoutAlign="center center">
+            <img src="../../assets/logo.png" alt="company logo">
+          </p>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card [routerLink]="['/calendar/4']">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h2>
+            Société 4
+          </h2>
+          <p fxLayoutAlign="center center">
+            <img src="../../assets/logo.png" alt="company logo">
+          </p>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-container>

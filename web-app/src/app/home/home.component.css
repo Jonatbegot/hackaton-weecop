@@ -5,3 +5,16 @@ mat-card {
   max-height: 60%;
   cursor: pointer;
 }
+
+mat-card:hover {
+  background-color: #1481814d;
+}
+
+ng-container {
+  max-height: 90vh;
+}
+
+img {
+  max-width: 30%;
+  height: auto;
+}

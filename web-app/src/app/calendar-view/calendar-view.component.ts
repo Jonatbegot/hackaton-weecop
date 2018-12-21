@@ -65,8 +65,8 @@ export class CalendarViewComponent implements OnInit {
 
   addEvent(e) {
     const current = new Date(moment().format());
-    const selected = e.date._d;
-    if (selected.getTime() < current.getTime()) {
+    const selected = e.date ? e.date._d : null;
+    if (selected && selected.getTime() < current.getTime()) {
       // const snackBarRef = this.snackBar.open('Créneau horaire déjà passé');
       this.snackBar.open('Créneau horaire déjà passé', '', {
         duration: 2000
@@ -81,7 +81,7 @@ export class CalendarViewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-     this.confirmEvent(data);
+        this.confirmEvent(data);
 
       }
     });
