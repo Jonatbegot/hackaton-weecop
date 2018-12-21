@@ -3,3 +3,6 @@
 #google-calendar
 client_secret.json
 token.json
+
+#modules
+node_modules
