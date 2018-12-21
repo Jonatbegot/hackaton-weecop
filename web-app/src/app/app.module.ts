@@ -1,4 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -7,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { MatDialogModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,14 +20,26 @@ import localeFrExtra from '@angular/common/locales/extra/fr';
 registerLocaleData(localeFr, 'fr-FR', localeFrExtra);
 
 import { AppComponent } from './app.component';
-import { FormRendezVousComponent } from './common/form-rendez-vous/form-rendez-vous.component';
+import { FormRendezVousComponent } from './form-rendez-vous/form-rendez-vous.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CalendarViewComponent } from './calendar-view/calendar-view.component';
+import { HomeComponent } from './home/home.component';
+
+
+const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'calendar/:id', component: CalendarViewComponent },
+  { path: '**', component: CalendarViewComponent }
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FormRendezVousComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CalendarViewComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +51,15 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatFormFieldModule,
     HttpClientModule,
     MatInputModule,
+    MatGridListModule,
     MatCardModule,
     OverlayModule,
     MatButtonModule,
     MatListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule.forRoot(
+      appRoutes //
+    ),
   ],
   exports: [ConfirmDialogComponent],
   entryComponents: [FormRendezVousComponent, ConfirmDialogComponent],

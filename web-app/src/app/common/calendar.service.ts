@@ -13,15 +13,15 @@ export class CalendarService {
 
   constructor(private http: HttpClient) { }
 
-  getEvents(): Observable<any> {
-    return this.http.get<Event[]>(`http://localhost:3000/calendar/events`)
+  getEvents(calId): Observable<any> {
+    return this.http.get<Event[]>(`http://localhost:3000/calendar/events/${calId}`)
       .pipe(
         map(events => events.map(event => toEventShort(event)))
       );
   }
-  postEvent(data): Observable<any> {
+  postEvent(data, calId): Observable<any> {
     const newEvent = toGoogleEvent(data);
-    return this.http.post<Event>(`http://localhost:3000/calendar`, newEvent)
+    return this.http.post<Event>(`http://localhost:3000/calendar/${calId}`, newEvent)
       .pipe(
         map(event => toEvent(event))
       );

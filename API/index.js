@@ -10,14 +10,22 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const port = 3000;
 
+const calIds = {
+  1: 'primary',
+  2: 'jlagoj5jko2b32it06t90inr7o@group.calendar.google.com'
+}
 
-app.get('/calendar/events', function (req, res) {
+app.get('/calendar/events/:calId', function (req, res) {
+  const calId = req.params.calId;
+  console.log(calId);
+  const calendarId = calIds[calId];
+  console.log(calendarId);
   const calendar = google.calendar({
     version: 'v3'
   });
   calendar.events.list({
     auth: oAuth2,
-    calendarId: "primary",
+    calendarId: calendarId,
     timeMin: (new Date()).toISOString(),
     singleEvents: true,
     orderBy: 'startTime',
@@ -30,7 +38,10 @@ app.get('/calendar/events', function (req, res) {
   });
 });
 
-app.post('/calendar/', (req, res) => {
+app.post('/calendar/:calId', (req, res) => {
+  const calId = req.params.calId;
+  const calendarId = calIds[calId];
+  console.log(calendarId);
   const event = req.body;
   console.log(event);
   const calendar = google.calendar({
@@ -39,7 +50,7 @@ app.post('/calendar/', (req, res) => {
   });
   calendar.events.insert({
       auth: oAuth2,
-      calendarId: 'primary',
+      calendarId: calendarId,
       resource: event,
   //   sendUpdates: 'all',
     },
