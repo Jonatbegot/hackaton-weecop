@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Event } from '../event';
 
@@ -38,8 +38,7 @@ export class FormRendezVousComponent implements OnInit {
           name: data.name,
           email: data.email,
           title: data.title,
-          company: data.company,
-          endTime: `${data.end._d.getHours()}:${data.end._d.getMinutes()}`
+          company: data.company
         });
       }
     }

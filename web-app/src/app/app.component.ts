@@ -7,6 +7,7 @@ import { Options } from 'fullcalendar';
 import { CalendarService } from './common/calendar.service';
 
 import * as moment from 'moment';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -53,25 +54,26 @@ export class AppComponent implements OnInit {
 
   addEvent(e) {
     const dialogRef = this.dialog.open(FormRendezVousComponent, {
-      height: '400px',
-      width: '600px',
+      height: '500px',
+      width: '800px',
       data: e
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.postEvent(result).subscribe(res => {
+          this.confirmEvent(res);
           this.ucCalendar.fullCalendar('renderEvent', res);
         });
       }
     });
   }
 
-  updateEvent(e) {
+  updateEvent(data) {
     const dialogRef = this.dialog.open(FormRendezVousComponent, {
       height: '400px',
-      width: '600px',
-      data: e.event
+      width: '800px',
+      data: data
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -82,4 +84,17 @@ export class AppComponent implements OnInit {
     });
   }
 
+
+  confirmEvent(data) {
+    console.log('ok');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '800px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateEvent(data);
+      }
+    });
+  }
 }
