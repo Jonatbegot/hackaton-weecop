@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
@@ -39,7 +40,7 @@ const appRoutes: Routes = [
     FormRendezVousComponent,
     ConfirmDialogComponent,
     CalendarViewComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatListModule,
     FlexLayoutModule,
+    MatSnackBarModule,
     RouterModule.forRoot(
       appRoutes //
     ),

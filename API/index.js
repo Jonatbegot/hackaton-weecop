@@ -11,15 +11,20 @@ app.use(bodyParser.json());
 const port = 3000;
 
 const calIds = {
-  1: 'primary',
-  2: 'jlagoj5jko2b32it06t90inr7o@group.calendar.google.com'
+  1: {
+    id: 'primary',
+    email: 'hackathon2wcs@gmail.com'
+  },
+  2: {
+    id: 'jlagoj5jko2b32it06t90inr7o@group.calendar.google.com',
+    email: 'hackathon2wcs@gmail.com'
+  }
 }
 
 app.get('/calendar/events/:calId', function (req, res) {
   const calId = req.params.calId;
-  console.log(calId);
-  const calendarId = calIds[calId];
-  console.log(calendarId);
+  const calendarId = calIds[calId].id;
+
   const calendar = google.calendar({
     version: 'v3'
   });
@@ -40,19 +45,23 @@ app.get('/calendar/events/:calId', function (req, res) {
 
 app.post('/calendar/:calId', (req, res) => {
   const calId = req.params.calId;
-  const calendarId = calIds[calId];
-  console.log(calendarId);
+  const calendarEmail = calIds[calId].email;
+
   const event = req.body;
-  console.log(event);
+  event.attendees.push({
+    displayName: 'hôte',
+    email: calendarEmail
+  })
+
   const calendar = google.calendar({
     version: 'v3',
     oAuth2
   });
   calendar.events.insert({
       auth: oAuth2,
-      calendarId: calendarId,
+      calendarId: '2hlruo3oqh5e91nlsgkrqsifbk@group.calendar.google.com', // calendrier tampon
       resource: event,
-  //   sendUpdates: 'all',
+    sendUpdates: 'all',
     },
     function (err, event) {
       if (err) {
