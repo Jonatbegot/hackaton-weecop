@@ -10,10 +10,12 @@ import { Event } from '../common/event';
   styleUrls: ['./form-rendez-vous.component.css']
 })
 export class FormRendezVousComponent implements OnInit {
-
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   form = this.fb.group({
     name : ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', Validators.compose([
+      Validators.required,
+      Validators.pattern(this.emailPattern)])],
     title: ['', Validators.required],
     company: ['']
   });
