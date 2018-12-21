@@ -27,12 +27,12 @@ export class FormRendezVousComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FormRendezVousComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder ) {
-      // if creation
+      // if creation of an event
       if (data.date) {
         this.startDate = this.getStartDate(data);
         this.endDate = this.getEndDate(data);
       }
-      // if update
+      // if update of an event
       if (data.name) {
         this.startDate = data.start;
         this.endDate = data.end;
@@ -49,11 +49,13 @@ export class FormRendezVousComponent implements OnInit {
   ngOnInit() {
   }
 
+  // validate changes
   submit(): void {
     this.createEvent();
     this.dialogRef.close(this.event);
   }
 
+  // create new Event object
   createEvent() {
     const start = this.startDate;
     const end = this.endDate;
@@ -68,6 +70,7 @@ export class FormRendezVousComponent implements OnInit {
     );
   }
 
+  // get start date in the appropriate format
   getStartDate(data) {
     return new Date(
       data.date._i[0], // year
@@ -80,6 +83,7 @@ export class FormRendezVousComponent implements OnInit {
     );
   }
 
+  // get start date in the appropriate format
   getEndDate(data) {
     return new Date(
       data.date._i[0], // year

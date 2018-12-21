@@ -19,6 +19,8 @@ export class CalendarService {
         map(events => events.map(event => toEventShort(event)))
       );
   }
+
+
   postEvent(data, calId): Observable<any> {
     const newEvent = toGoogleEvent(data);
     return this.http.post<Event>(`http://localhost:3000/calendar/${calId}`, newEvent)

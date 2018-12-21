@@ -31,11 +31,15 @@ export class CalendarViewComponent implements OnInit {
   calendarOptions: Options;
 
   ngOnInit() {
+    // get the Host's calendarId
     this.calendarId = this.route.snapshot.params.id;
+
+    // get events
     this.service.getEvents(this.calendarId).subscribe(res => {
       this.events = res;
-      console.log(this.events);
     });
+
+    // calendar options
     this.calendarOptions = {
       defaultView: 'agendaWeek',
       locale: 'fr',
@@ -63,6 +67,11 @@ export class CalendarViewComponent implements OnInit {
     };
   }
 
+  /***
+   * open dialog to create new event
+   *
+   * @param e => event or data
+   */
   addEvent(e) {
     const current = new Date(moment().format());
     const selected = e.date ? e.date._d : null;
@@ -87,7 +96,9 @@ export class CalendarViewComponent implements OnInit {
     });
   }
 
-
+  /**
+   * display dialog where participant can confirm creation, or update the event
+   */
   confirmEvent(data) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '800px',
@@ -102,7 +113,6 @@ export class CalendarViewComponent implements OnInit {
 
       } else {
         this.addEvent(data);
-
       }
     });
   }
